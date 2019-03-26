@@ -1,31 +1,38 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+using ll = long long;
 
-typedef long long ll;
+int main() {
+    cin.tie(0);
+    cout.tie(0);
+    ios::sync_with_stdio(false);
 
-int main()
-{
-	int N, Q;
-	string S;
-	string tmp;
-	int l = 0, r = 0;
-	int count = 0;
-
-	cin >> N >> Q;
-	cin >> S;
-
-	for (int i = 0; i < Q; i++)
-	{
-		cin >> l >> r;
-		for (int j = l; i < r; i += 2)
-		{
-			if (S[j] == 'A' && S[j + 1] == 'C')
-			{
-				count++;
-			}
-		}
-	}
-	cout << count << endl;
-	return 0;
+    int N, Q;
+    string S;
+    cin >> N >> Q;
+    cin >> S;
+    vector<pair<int, int>> lr;
+    int tmp_l, tmp_r;
+    for (int i = 0; i < Q; i++) {
+        cin >> tmp_l >> tmp_r;
+        lr.push_back(make_pair(tmp_l, tmp_r));
+    }
+    vector<int> mem;
+    int count = 0;
+    char buf = ' ';
+    for (auto itr = S.begin(); itr != S.end(); ++itr) {
+        if (*itr == 'A') {
+            buf = 'A';
+        } else if (buf == 'A' && *itr == 'C') {
+            count++;
+            buf = ' ';
+        } else {
+            buf = ' ';
+        }
+        mem.push_back(count);
+    }
+    for (int i = 0; i < Q; i++) {
+        cout << mem[lr[i].second - 1] - mem[lr[i].first - 1] << "\n";
+    }
+    return 0;
 }
