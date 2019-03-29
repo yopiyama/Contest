@@ -19,4 +19,6 @@ int main() {
     divisor.push_back(gcd_AB);
     reverse(divisor.begin(), divisor.end());
     cout << divisor.at(K - 1) << "\n";
+
+    return 0;
 }
