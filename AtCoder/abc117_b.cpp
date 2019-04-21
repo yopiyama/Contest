@@ -9,18 +9,22 @@ int main() {
 
     int N;
     cin >> N;
-    vector<int> A(N);
+    vector<int> L(N);
     int tmp;
     for (int i = 0; i < N; i++) {
         cin >> tmp;
-        A[i] = tmp;
+        L[i] = tmp;
     }
 
-    tmp = A[0];
-    for (int i : A) {
-        tmp = __gcd(tmp, i);
+    sort(L.begin(), L.end());
+    int largest = L.back();
+    L.pop_back();
+    int sum = accumulate(L.begin(), L.end(), 0);
+    if (largest < sum) {
+        cout << "Yes\n";
+    } else {
+        cout << "No\n";
     }
 
-    cout << tmp << "\n";
     return 0;
 }
